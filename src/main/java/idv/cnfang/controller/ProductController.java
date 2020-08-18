@@ -16,7 +16,7 @@ import idv.cnfang.model.Product;
 import idv.cnfang.service.ProductService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/product")
 public class ProductController {
     protected static final Logger logger = LoggerFactory.getLogger(ProductController.class);
     
@@ -24,7 +24,7 @@ public class ProductController {
     ProductService productService;
     
     // -------------------Retrieve All Products---------------------------------------------
-    @RequestMapping(value = "/product/", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> listAllProducts() {
         List<Product> products = productService.findAllProducts();
         return products.isEmpty()? ResponseEntity.noContent().build(): ResponseEntity.ok(products);
@@ -32,7 +32,7 @@ public class ProductController {
 
     
     // -------------------Retrieve Single Product By Id------------------------------------------
-    @RequestMapping(value = "/product/{productId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
     public ResponseEntity<?> getProduct(@PathVariable("productId") long productId) {
         logger.info("Fetching Product with id {}", productId);
         

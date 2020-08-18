@@ -2,6 +2,9 @@ package idv.cnfang.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,7 @@ import idv.cnfang.service.CustomerService;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/customer")
 public class CustomerController {
     protected static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
     
@@ -27,7 +30,7 @@ public class CustomerController {
     CustomerService customerService;
     
     // -------------------Retrieve All Customers----------------------------------------
-    @RequestMapping(value = "/customer/", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> listAllUsers() {
         logger.info("Fetching All Customers");
         
@@ -37,7 +40,7 @@ public class CustomerController {
 
     
     // -------------------Retrieve Single Customer by Id---------------------------------
-    @RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{customerId}", method = RequestMethod.GET)
     public ResponseEntity<?> getCustomer(@PathVariable("customerId") long customerId) {
         logger.info("Fetching Customer with id {}", customerId);
         
@@ -47,7 +50,7 @@ public class CustomerController {
     
     
     // ------------Retrieve Single Customer by username---------------------------------
-    @RequestMapping(value = "/customer/username={username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/username={username}", method = RequestMethod.GET)
     public ResponseEntity<?> getCustomerByUsername(@PathVariable("username") String username) {
         logger.info("Fetching Customer with username {}", username);
         
@@ -57,7 +60,7 @@ public class CustomerController {
 
     
     // -------------------Create a Customer-------------------------------------------
-    @RequestMapping(value = "/customer/", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
         logger.info("Creating Customer : {}", customer);
         
@@ -68,7 +71,7 @@ public class CustomerController {
 
     
     // -------------------Update a Customer------------------------------------------
-    @RequestMapping(value = "/customer/{customerId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{customerId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateCustomer(@PathVariable("customerId") long customerId, @RequestBody Customer customer) {
         logger.info("Updating customer with id {}", customerId);
 
@@ -81,7 +84,7 @@ public class CustomerController {
 
     
     // ------------------- Delete a Customer-----------------------------------------
-    @RequestMapping(value = "/customer/{customerId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{customerId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteCustomer(@PathVariable("customerId") long customerId) {
         logger.info("Fetching & Deleting customer with id {}", customerId);
 
@@ -92,7 +95,7 @@ public class CustomerController {
 
     
     // --------------------------- Delete All Customers-----------------------------
-    @RequestMapping(value = "/customer/", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteAllCustomers() {
         logger.info("Deleting All Customers");
 
