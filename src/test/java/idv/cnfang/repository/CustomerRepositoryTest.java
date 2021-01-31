@@ -28,7 +28,8 @@ class CustomerRepositoryTest {
     @Test
     void whenFindByUsername_thenReturnCustomer() {
         Customer customer = new Customer("mockUsername", "mock@mail.com");
-        entityManager.persistAndFlush(customer);
+        entityManager.persist(customer);
+        entityManager.flush();
         Customer found = customerRepository.findByUsername(customer.getUsername());
         assertThat(found).isEqualTo(customer);
     }
