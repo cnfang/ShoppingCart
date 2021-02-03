@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Profile;
@@ -19,6 +20,9 @@ import idv.cnfang.model.Product;
 
 @DataJpaTest
 class ProductRepositoryTest {
+	
+	@Value("${myapp.describe}")
+	private String myString;
     
     @Autowired
     private ProductRepository productRepository;
@@ -46,6 +50,7 @@ class ProductRepositoryTest {
       assertThat(dataSource).isNotNull();
       assertThat(entityManager).isNotNull();
       assertThat(productRepository).isNotNull();
+      assertThat(myString).isEqualTo("hello.world");
     }
 
 }
